@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+	<link rel="stylesheet" href="/css/styles2.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Registro de Usuario</h1>
+    <form th:action="@{/registro}" method="post">
+        <div>
+            <label for="username">Nombre de Usuario (Mínimo 4 caracteres, máximo 60):</label>
+            <input type="text" id="username" name="username" required minlength="4" maxlength="60" placeholder="Ingrese su nombre de usuario">
+			
+        </div>
+		
+        <div>
+            <label for="surname">Apellidos de Usuario (Mínimo 4 caracteres, máximo 60):</label>
+            <input type="text" id="lastname" name="lastname" required minlength="4" maxlength="60" placeholder="Ingrese sus apellidos">
+			
+        </div>
+		
+        <div>
+            <label for="dob">Fecha de Nacimiento (formato debe ser DD-MM-YYYY):</label>
+            <input type="text" id="dateBirth" name="dateBirth" required pattern="\d{2}-\d{2}-\d{4}" placeholder="DD-MM-YYYY">
+		
+        </div>
+	
+        <div>
+            <label for="email">Correo Electrónico (El correo debe contener @ y un dominio.xyz):</label>
+            <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="ejemplo@correo.com">
+			
+        </div>
+		
+        <div>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required placeholder="Ingrese su contraseña">
+           
+        </div>
+        <button id="submit" type="submit">Registrarse</button>
+		<div>
+			<p>Completar todos los campos para habilitar el registro</p>
+		</div>
+    </form>
+</div>
+
+</body>
+</html>
+<script>
+	const submitButton = document.getElementById("submit");
+	submitButton.addEventListener('click',()=>{
+		const username = document.getElementById('username').value;
+		const lastname = document.getElementById('lastname').value; 
+		const dateBirth = document.getElementById('dateBirth').value;
+		const email = document.getElementById('email').value;
+		const password = document.getElementById('password').value;
+		const data = {
+			username,
+			lastname,
+			dateBirth,
+			email,
+			password
+		}
+		
+		const jsonData = JSON.stringify(data);
+		fetch('/registro', {
+			method: 'POST',
+			headers:{
+				'Content-Type': 'application/json'
+			},
+			body: jsonData
+			
+		})
+		.then(response =>{
+			
+			//Manejando respuesta
+		})
+	})
+	
+	</script>
+	
+	

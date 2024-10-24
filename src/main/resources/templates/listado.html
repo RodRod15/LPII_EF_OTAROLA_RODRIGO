@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Listado</title>
+	<link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+	<h1>Lista Usuarios</h1>
+	<table border="1px solid black">
+		<th:block th:each="p: ${ltsUser}">
+			<tr>
+				<th>ID</th>
+				<th>Fecha nacimiento</th>
+				<th>Mail</th>
+				<th>Usuario</th>
+				<th>Apellidos</th>
+			</tr>
+			<td th:text="${p.id}"></td>
+			<td th:text="${p.dateBirth}"></td>
+			<td th:text="${p.email}"></td>
+			<td th:text="${p.username}"></td>
+			<td th:text="${p.lastname}"></td>
+
+		</th:block>
+	</table>
+<br>
+<br>
+<hr>
+	<form th:action="@{/UserReport}" method="get">
+
+		<button class="float-left submit-button">Exportar usuarios - últimos 6 meses</button>
+	</form>
+
+
+
+</body>
+
+</html>
